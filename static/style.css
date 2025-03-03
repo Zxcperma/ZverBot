@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
+    color: black;
 }
 
 .container {
@@ -34,9 +35,25 @@ body {
     pointer-events: none;
 }
 
-#resetGame {
+#resetGame, #toggleTheme {
     padding: 10px 20px;
     font-size: 18px;
     margin-top: 20px;
     cursor: pointer;
+}
+
+/* Темная тема */
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+.dark-theme .cell {
+    background-color: #444;
+    color: white;
+}
+
+.dark-theme button {
+    background-color: white;
+    color: black;
 }
