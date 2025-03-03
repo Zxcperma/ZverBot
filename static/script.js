@@ -4,6 +4,7 @@ tg.expand();
 document.addEventListener("DOMContentLoaded", () => {
     const cells = document.querySelectorAll(".cell");
     const resetButton = document.getElementById("resetGame");
+    const themeButton = document.getElementById("toggleTheme");
     let currentPlayer = "X";
     let board = Array(9).fill(null);
 
@@ -44,6 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPlayer = "X";
     }
 
+    function toggleTheme() {
+        document.body.classList.toggle("dark-theme");
+    }
+
     cells.forEach(cell => cell.addEventListener("click", handleClick));
     resetButton.addEventListener("click", resetGame);
+    themeButton.addEventListener("click", toggleTheme);
 });
