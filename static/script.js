@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = "X";
     let board = Array(9).fill(null);
 
-    // Проверка текущей темы при загрузке
+    // Проверяем, есть ли сохраненная тема
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-theme");
     }
@@ -52,8 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function toggleTheme() {
         document.body.classList.toggle("dark-theme");
-        const isDark = document.body.classList.contains("dark-theme");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
+
+        // Обновляем localStorage
+        if (document.body.classList.contains("dark-theme")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
     }
 
     cells.forEach(cell => cell.addEventListener("click", handleClick));
