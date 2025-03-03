@@ -5,8 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const cells = document.querySelectorAll(".cell");
     const resetButton = document.getElementById("resetGame");
     const themeButton = document.getElementById("toggleTheme");
+    const gameStatus = document.querySelector("h1"); // Заголовок для отображения хода
     let currentPlayer = "X";
     let board = Array(9).fill(null);
+
+    function updateStatus() {
+        gameStatus.textContent = `${currentPlayer} - ваш ход`;
+    }
 
     function checkWinner() {
         const winPatterns = [
@@ -23,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Проверка на ничью
+        // Проверка на ничью (если все клетки заняты)
         if (!board.includes(null)) {
             setTimeout(() => alert("Ничья!"), 100);
             return true;
@@ -40,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.target.classList.add("taken");
             if (checkWinner()) return;
             currentPlayer = currentPlayer === "X" ? "O" : "X";
+            updateStatus();
         }
     }
 
@@ -50,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.classList.remove("taken");
         });
         currentPlayer = "X";
+        updateStatus();
     }
 
     function toggleTheme() {
@@ -57,11 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
     }
 
-    // Загрузка темы при загрузке страницы
+    // Загрузка темы при старте
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-theme");
     }
 
+    updateStatus(); // Установить начальный статус
     cells.forEach(cell => cell.addEventListener("click", handleClick));
     resetButton.addEventListener("click", resetGame);
     themeButton.addEventListener("click", toggleTheme);
