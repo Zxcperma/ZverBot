@@ -1,14 +1,14 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    transition: background 0.3s, color 0.3s;
 }
 
 .container {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
-.board {
+.game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
@@ -24,7 +24,6 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 2em;
-    background-color: white;
     border: 2px solid #333;
     cursor: pointer;
 }
@@ -34,15 +33,34 @@ body {
 }
 
 button {
-    padding: 10px 20px;
+    margin: 10px;
+    padding: 10px;
     font-size: 16px;
     cursor: pointer;
+    border: none;
     background-color: #007bff;
     color: white;
-    border: none;
     border-radius: 5px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+.dark-theme {
+    background: black;
+    color: white;
+}
+
+.dark-theme .cell {
+    border-color: white;
+}
+
+.dark-theme button {
+    background-color: #444;
+    color: white;
+}
+
+.dark-theme button:hover {
+    background-color: #222;
 }
