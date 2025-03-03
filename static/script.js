@@ -8,11 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = "X";
     let board = Array(9).fill(null);
 
-    // Проверяем, есть ли сохраненная тема
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-theme");
-    }
-
     function checkWinner() {
         const winPatterns = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -27,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return true;
             }
         }
+
+        // Проверка на ничью
+        if (!board.includes(null)) {
+            setTimeout(() => alert("Ничья!"), 100);
+            return true;
+        }
+
         return false;
     }
 
@@ -52,13 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function toggleTheme() {
         document.body.classList.toggle("dark-theme");
+        localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+    }
 
-        // Обновляем localStorage
-        if (document.body.classList.contains("dark-theme")) {
-            localStorage.setItem("theme", "dark");
-        } else {
-            localStorage.setItem("theme", "light");
-        }
+    // Загрузка темы при загрузке страницы
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-theme");
     }
 
     cells.forEach(cell => cell.addEventListener("click", handleClick));
